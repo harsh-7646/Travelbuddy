@@ -1,0 +1,228 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f8f9fc;
+  overflow-x: hidden;
+}
+
+.dashboard-container {
+  display: flex;
+  overflow-x: hidden;
+}
+
+.sidebar {
+  width: 220px;
+  background: #1d9bf0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: sticky;
+  top: 0;
+  flex-shrink: 0;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar h2 {
+  text-align: center;
+  font-size: 22px;
+  padding-top: 16px;
+  padding-bottom: 20px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.sidebar-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid white;
+}
+
+.sidebar-ul li {
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sidebar-ul li a {
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+}
+
+.sidebar-ul li:hover {
+  background-color: white;
+}
+
+.sidebar-ul li:hover a {
+  color: #1d9bf0;
+  font-weight: bold;
+}
+
+.sidebar-ul li.active,
+.sidebar-ul li.active a {
+  background-color: white;
+  color: #1d9bf0;
+  font-weight: bold;
+}
+
+.sidebar-ul li:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.main-content {
+  flex-grow: 1;
+  overflow-x: hidden;
+}
+
+.navbar {
+  background: linear-gradient(to right, #0288d1, #03a9f4);
+  color: white;
+  padding: 21px 30px;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: white;
+  cursor: pointer;
+  display: none;
+  /* hidden on desktop */
+}
+
+/* Stats grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 0 15px;
+}
+
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.1); /* 🔹 same as user card */
+  border-radius: 18px;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  z-index: 1;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+/* 🔹 Animated gradient border (same as user card) */
+.card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 180deg,
+    #2e86de,
+    #00c6ff,
+    #2e86de,
+    #00c6ff
+  );
+  animation: rotate 6s linear infinite;
+  z-index: 0;
+  opacity: 0.2;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+/* 🔹 Title same as user card */
+.card h4 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #2e86de, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+/* 🔹 Value text */
+.card p {
+  margin: 6px 0 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #222;
+  position: relative;
+  z-index: 1;
+}
+
+/* 🔹 Same animation as user card */
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* 🔹 Responsive Sidebar */
+@media (max-width: 992px) {
+  .menu-btn {
+    display: block !important; /* force visible */
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    z-index: 999;
+    height: 100%;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    flex: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 15px 20px;
+    font-size: 16px;
+  }
+
+  .card {
+    height: 140px;
+  }
+
+  .card p {
+    font-size: 20px;
+  }
+}

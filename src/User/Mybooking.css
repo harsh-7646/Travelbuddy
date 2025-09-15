@@ -1,0 +1,173 @@
+.bookings-page {
+  background: #f5f7fb;
+  font-family: "Segoe UI", sans-serif;
+  padding-bottom: 50px;
+}
+
+/* Header */
+.gradient-bg {
+  padding: 60px 20px 30px;
+  background: linear-gradient(to bottom right, #fbcfe8, #ffffff, #bfdbfe); 
+  /* Tailwind's from-pink-100 via-white to-blue-100 */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-card {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 25px 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  animation: fadeInUp 0.8s ease;
+}
+
+.header-icon {
+  font-size: 55px;
+  animation: bounce 1.5s infinite;
+  color: #ef4444; /* nice red airplane to pop against gradient */
+}
+
+.header-text h1 {
+  font-size: 2.2rem;
+  margin: 0;
+  font-weight: 700;
+  color: #1f2937; /* dark gray text for contrast */
+}
+
+.header-text p {
+  font-size: 1rem;
+  margin-top: 6px;
+  color: #374151; /* medium gray */
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 40px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #ddd;
+}
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s forwards;
+}
+.timeline-dot {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  margin-right: 20px;
+  border: 3px solid #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+.timeline-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  flex: 1;
+  position: relative;
+}
+.timeline-content h2 {
+  margin: 5px 0;
+  color: #222;
+}
+.timeline-content p {
+  margin: 4px 0;
+  color: #444;
+}
+.timeline-content .price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2575fc;
+  margin-top: 6px;
+}
+
+/* Status tag */
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.status-tag.confirmed { background: #e6f4ea; color: #2e7d32; }
+.status-tag.pending { background: #fff7e6; color: #b26a00; }
+.status-tag.cancelled { background: #fdecea; color: #c62828; }
+
+/* Button */
+.cancel-btn {
+  margin-top: 10px;
+  background: linear-gradient(135deg, #ff4d4d, #b71c1c);
+  color: white;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+.cancel-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #e53935, #8e0000);
+}
+.no-action {
+  color: #aaa;
+  font-size: 13px;
+}
+
+/* Animation */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .timeline::before {
+    left: 20px;
+  }
+  .timeline-dot {
+    width: 50px;
+    height: 50px;
+    margin-right: 12px;
+  }
+}

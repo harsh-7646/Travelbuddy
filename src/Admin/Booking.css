@@ -1,0 +1,262 @@
+.booking-section {
+  padding: 20px;
+  background: #f4f6f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Filter */
+.booking-filter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.booking-filter label {
+  margin-right: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.booking-filter select {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.booking-filter select:hover {
+  border-color: #0288d1;
+}
+
+/* Cards Container */
+.booking-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-top: 15px;
+}
+
+/* ==== Glassmorphism Booking Card ==== */
+.booking-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 18px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.booking-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 180deg,
+    #2e86de,
+    #00c6ff,
+    #2e86de,
+    #00c6ff
+  );
+  animation: rotate 6s linear infinite;
+  z-index: 0;
+  opacity: 0.2;
+}
+
+.booking-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+/* Card Header */
+.booking-card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.booking-card-id {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Payment Badge */
+.booking-payment {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  transition: 0.3s;
+  position: relative;
+  z-index: 1;
+}
+
+.booking-payment.paid {
+  background: #d4edda;
+  color: #155724;
+}
+
+.booking-payment.unpaid {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.booking-payment.refunded {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+/* Card Body */
+.booking-card-body p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #222;
+  position: relative;
+  z-index: 1;
+}
+
+/* Gradient Status Text */
+.booking-card-body strong {
+  background: linear-gradient(90deg, #2e86de, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Status Border Colors (Left stripe not needed now, but can keep for accent) */
+.booking-pending {
+  border-left: 6px solid #ffc107;
+}
+
+.booking-confirmed {
+  border-left: 6px solid #28a745;
+}
+
+.booking-cancelled {
+  border-left: 6px solid #dc3545;
+}
+
+/* Details Button */
+.booking-details-btn {
+  margin-top: 12px;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, #0288d1, #26c6da);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s, transform 0.3s;
+  position: relative;
+  z-index: 1;
+}
+
+.booking-details-btn:hover {
+  background: linear-gradient(135deg, #0277bd, #00acc1);
+  transform: scale(1.05);
+}
+
+/* Modal */
+.booking-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 10px;
+}
+
+.booking-modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  width: 420px;
+  max-width: 95%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.booking-modal-content h3 {
+  margin-bottom: 18px;
+  color: #0288d1;
+  font-size: 20px;
+}
+
+.booking-modal-content p {
+  margin: 6px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.booking-modal-close {
+  margin-top: 18px;
+  padding: 7px 14px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.booking-modal-close:hover {
+  background: #c82333;
+  transform: scale(1.05);
+}
+
+/* Modal Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Rotate gradient animation */
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .booking-cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-card-body p {
+    font-size: 13px;
+  }
+
+  .booking-details-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .booking-modal-content {
+    width: 95%;
+    padding: 18px;
+  }
+}

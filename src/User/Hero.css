@@ -1,0 +1,137 @@
+.hero-section {
+  background-size: cover;
+  background-position: center;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  color: white;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.45); 
+  z-index: 0;
+}
+
+.hero-content {
+  padding-left: 50px;
+  max-width: 500px;
+  position: relative;
+  z-index: 1; 
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: #eee;
+}
+
+/* Dots */
+.hero-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 2;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: #bbb;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: white;
+  transform: scale(1.2);
+}
+
+/* Responsive Styles */
+
+/* Tablet */
+@media screen and (max-width: 1024px) {
+  .hero-content {
+    padding-left: 30px;
+    max-width: 400px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content p {
+    font-size: 15px;
+  }
+}
+
+/* Small Tablets / Large Mobile */
+@media screen and (max-width: 768px) {
+  .hero-section {
+    height: 70vh;
+    justify-content: center;
+  }
+
+  .hero-content {
+    padding-left: 20px;
+    text-align: center;
+    max-width: 90%;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 480px) {
+  .hero-section {
+    height: 60vh;
+  }
+
+  .hero-content h1 {
+    font-size: 1.6rem;
+    line-height: 1.3;
+  }
+
+  .hero-content p {
+    font-size: 13px;
+  }
+
+  .hero-dots {
+    gap: 8px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .dot.active {
+    transform: scale(1.1);
+  }
+}
