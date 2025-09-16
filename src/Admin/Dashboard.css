@@ -170,7 +170,7 @@ body {
   z-index: 1;
 }
 
-/* 🔹 Value text */
+
 .card p {
   margin: 6px 0 0;
   font-size: 1.4rem;
@@ -180,7 +180,38 @@ body {
   z-index: 1;
 }
 
-/* 🔹 Same animation as user card */
+
+.navbar {
+  background: linear-gradient(to right, #0288d1, #03a9f4);
+  color: white;
+  padding: 21px 30px;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  gap: 15px;
+}
+
+.navbar-title {
+  flex: 1;
+}
+
+.logout-icon {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.logout-icon:hover {
+  color: #ff9800;
+}
+
+
 @keyframes rotate {
   100% {
     transform: rotate(360deg);
@@ -188,10 +219,10 @@ body {
 }
 
 
-/* 🔹 Responsive Sidebar */
+
 @media (max-width: 992px) {
   .menu-btn {
-    display: block !important; /* force visible */
+    display: block !important; 
   }
 
   .sidebar {

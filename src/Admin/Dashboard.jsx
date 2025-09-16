@@ -112,10 +112,10 @@
 
 
 import React, { useState } from "react";
-import { Routes, Route, Navigate, NavLink, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 
-import { FaThLarge, FaHotel, FaUser, FaRupeeSign, FaBars, FaTimes } from "react-icons/fa";
+import { FaThLarge, FaHotel, FaUser, FaRupeeSign, FaBars, FaTimes, FaSignOutAlt } from "react-icons/fa";
 import { MdReviews, MdLaptopChromebook, MdPlace } from "react-icons/md";
 import { TbPackages } from "react-icons/tb";
 
@@ -131,7 +131,6 @@ import { bookingData } from "./Booking";
 import { hotelData } from "./Hotelmanagement";
 import { userData } from "./User";
 import { transactionData } from "./Transaction";
-// import { reviewData } from "./Review";
 
 const DashboardHome = () => {
   const stats = [
@@ -141,7 +140,6 @@ const DashboardHome = () => {
     { title: "Total Users", value: userData.length },
     { title: "Total Destination", value: 4 },
     { title: "Total Transaction", value: transactionData.length },
-    // { title: "Total Reviews", value: reviewData.length },
   ];
 
   return (
@@ -156,7 +154,7 @@ const DashboardHome = () => {
   );
 };
 
-const TitleBar = ({ toggleSidebar, isOpen }) => {
+const TitleBar = ({ toggleSidebar, isOpen, onLogout }) => {
   const location = useLocation();
   const pathToTitle = {
     "/admin": "Dashboard",
@@ -171,20 +169,31 @@ const TitleBar = ({ toggleSidebar, isOpen }) => {
 
   return (
     <div className="navbar">
-      {/* 🔹 Always show toggle button */}
       <button className="menu-btn" onClick={toggleSidebar}>
         {isOpen ? <FaTimes /> : <FaBars />}
       </button>
-      <h3>{pathToTitle[location.pathname] || "Dashboard"}</h3>
+      <h3 className="navbar-title">{pathToTitle[location.pathname] || "Dashboard"}</h3>
+
+      {/* 🔹 Logout Button on Right */}
+      <button className="logout-icon" onClick={onLogout}>
+        <FaSignOutAlt />
+      </button>
     </div>
   );
 };
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);
+
+  // 🔹 Logout handler
+  const handleLogout = () => {
+    localStorage.removeItem("authToken"); 
+    navigate("/"); // redirect to user side home
+  };
 
   return (
     <div className="dashboard-container">
@@ -205,7 +214,7 @@ const Dashboard = () => {
 
       {/* 🔹 Main Content */}
       <div className="main-content">
-        <TitleBar toggleSidebar={toggleSidebar} isOpen={sidebarOpen} />
+        <TitleBar toggleSidebar={toggleSidebar} isOpen={sidebarOpen} onLogout={handleLogout} />
         <Routes>
           <Route path="/" element={<DashboardHome />} />
           <Route path="booking" element={<Booking />} />
