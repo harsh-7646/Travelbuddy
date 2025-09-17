@@ -1,32 +1,11 @@
-// PackagesPage.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { FaSearch, FaMapMarkerAlt, FaClock, FaTag, FaPlaneDeparture } from "react-icons/fa";
 import Footer from "./Footer";
-
-const classNames = {
-  section: "py-20 bg-gradient-to-br from-pink-100 via-white to-blue-100",
-  container: "px-4 mx-auto max-w-7xl sm:px-6 lg:px-8",
-  heading:
-    "text-3xl font-bold text-gray-900 sm:text-4xl xl:text-4xl text-center",
-  description:
-    "mt-4 text-base text-gray-700 leading-relaxed max-w-2xl mx-auto text-center",
-  grid: "mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center place-items-center gap-6",
-  card:
-    "bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden flex flex-col hover:scale-105 transform transition duration-300 w-72 min-h-[400px]",
-  image: "h-44 w-full object-cover",
-  content: "p-5 flex-1 flex flex-col justify-between",
-  name: "text-lg font-semibold text-gray-800",
-  destination: "text-sm text-gray-600 mt-1",
-  duration: "text-sm text-gray-600 mt-1",
-  price: "mt-3 text-lg font-bold text-pink-600",
-  button:
-    "mt-auto inline-block bg-gradient-to-r from-pink-500 to-blue-500 hover:opacity-90 text-white text-sm font-semibold py-2 px-4 rounded-lg transition shadow-md",
-};
 
 const API_URL = "https://generateapi.techsnack.online/api/package";
 const token = "K4OS0XNqsLR7enT6";
 
-// 👉 Default Packages
 const defaultPackages = [
   {
     _id: "default-1",
@@ -35,7 +14,7 @@ const defaultPackages = [
     duration: "5 Days",
     price: 50000,
     image:
-      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80",
   },
   {
     _id: "default-2",
@@ -53,7 +32,7 @@ const defaultPackages = [
     duration: "4 Nights / 5 Days",
     price: 95000,
     image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80",
   },
 ];
 
@@ -67,11 +46,7 @@ function PackagesPage() {
 
   const fetchPackages = async () => {
     try {
-      const res = await axios.get(API_URL, {
-        headers: { Authorization: token },
-      });
-
-      console.log("Packages Response:", res.data);
+      const res = await axios.get(API_URL, { headers: { Authorization: token } });
 
       if (Array.isArray(res.data)) {
         setPackages([...defaultPackages, ...res.data]);
@@ -93,51 +68,92 @@ function PackagesPage() {
 
   return (
     <>
-    <section className={classNames.section}>
-      <div className={classNames.container}>
-        {/* Heading */}
-        <h2 className={classNames.heading}>Explore Our Travel Packages</h2>
-        <p className={classNames.description}>
-          Discover curated trips designed to make your journey unforgettable.
-          Choose from romantic escapes, adventurous getaways, and relaxing retreats.
-        </p>
-
-        {/* Search Bar */}
-        <div className="mt-8 text-center">
-          <input
-            type="text"
-            placeholder="Search by destination or package..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full sm:w-96 px-5 py-3 rounded-xl border border-black/20 bg-white/60 text-black placeholder-black/60 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
-          />
+      {/* Hero Section */}
+      <section className="relative h-[50vh] bg-gradient-to-r from-blue-600 via-pink-500 to-purple-600 flex items-center justify-center text-center text-white">
+        <img
+          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80"
+          alt="Travel Hero"
+          className="absolute inset-0 w-full h-full object-cover opacity-40"
+        />
+        <div className="relative z-10 max-w-3xl px-4">
+          <h1 className="text-5xl font-extrabold drop-shadow-lg">
+            Discover Your Next <span className="text-yellow-300">Adventure</span>
+          </h1>
+          <p className="mt-4 text-lg text-white/90">
+            Handpicked packages for every traveler – explore, relax & enjoy life’s journey.
+          </p>
         </div>
 
-        {/* Packages Grid */}
-        <div className={classNames.grid}>
-          {filteredPackages.length > 0 ? (
-            filteredPackages.map((pkg) => (
-              <div key={pkg._id} className={classNames.card}>
-                <img src={pkg.image} alt={pkg.name} className={classNames.image} />
-                <div className={classNames.content}>
-                  <h3 className={classNames.name}>{pkg.name}</h3>
-                  <p className={classNames.destination}>{pkg.destination}</p>
-                  <p className={classNames.duration}>{pkg.duration}</p>
-                  <p className={classNames.price}>₹{pkg.price}</p>
-                  <button className={classNames.button}>Book Now</button>
+        {/* Floating Search Bar */}
+        <div className="absolute bottom-[32px] left-1/2 -translate-x-1/2 w-full sm:w-2/3 md:w-1/2 px-4">
+          <div className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl flex items-center p-3">
+            <FaSearch className="ml-3 text-gray-500" />
+            <input
+              type="text"
+              placeholder="Search by destination or package..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full bg-transparent outline-none px-3 text-gray-800"
+            />
+            <button className="bg-gradient-to-r from-pink-500 to-blue-500 text-white px-5 py-2 rounded-xl font-semibold hover:opacity-90 transition">
+              Search
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Packages Grid */}
+      <section className="py-28 bg-gradient-to-br from-pink-50 via-white to-blue-50 relative">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-extrabold text-gray-900 text-center">
+            Popular Travel Packages
+          </h2>
+          <p className="mt-3 text-base text-gray-600 text-center">
+            Choose from stunning destinations around the world.
+          </p>
+
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            {filteredPackages.length > 0 ? (
+              filteredPackages.map((pkg) => (
+                <div
+                  key={pkg._id}
+                  className="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition transform hover:scale-[1.03]"
+                >
+                  <img
+                    src={pkg.image}
+                    alt={pkg.name}
+                    className="h-64 w-full object-cover group-hover:scale-110 transition duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                  <div className="absolute bottom-5 left-5 text-white">
+                    <h3 className="text-xl font-bold">{pkg.name}</h3>
+                    <div className="flex items-center gap-2 text-sm mt-1">
+                      <FaMapMarkerAlt className="text-yellow-400" />
+                      {pkg.destination}
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <FaClock className="text-blue-300" />
+                      {pkg.duration}
+                    </div>
+                    <div className="flex items-center gap-2 text-lg font-semibold text-pink-300 mt-2">
+                      <FaTag /> ₹{pkg.price.toLocaleString()}
+                    </div>
+                    <button className="mt-3 flex items-center gap-2 bg-gradient-to-r from-pink-500 to-blue-500 py-2 px-4 rounded-lg font-semibold shadow-lg hover:opacity-90 transition">
+                      <FaPlaneDeparture /> Book Now
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))
-          ) : (
-            <p className="col-span-full text-center text-gray-600">
-              No packages found...
-            </p>
-          )}
+              ))
+            ) : (
+              <p className="col-span-full text-center text-gray-600 text-lg">
+                No packages found...
+              </p>
+            )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <Footer />
+      <Footer />
     </>
   );
 }
