@@ -6,36 +6,6 @@ import "./Package.css";
 const token = "K4OS0XNqsLR7enT6";
 const API_URL = "https://generateapi.techsnack.online/api/package";
 
-const defaultPackages = [
-  {
-    _id: "default-1",
-    name: "Romantic Paris Getaway",
-    destination: "Paris",
-    duration: "5 Days",
-    price: 50000,
-    image:
-      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    _id: "default-2",
-    name: "Bali Adventure",
-    destination: "Bali",
-    duration: "7 Days",
-    price: 40000,
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQci5H4dz84BSITFdM6CRrl5H927Iep5RxV2Q&s",
-  },
-  {
-    _id: "default-3",
-    name: "Maldives Escape",
-    destination: "Maldives",
-    duration: "4 Nights / 5 Days",
-    price: 95000,
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-  },
-];
-
 function PackagesManagement() {
   const [form, setForm] = useState({
     name: "",
@@ -44,26 +14,25 @@ function PackagesManagement() {
     price: "",
     imageFile: null,
   });
-  const [list, setList] = useState(defaultPackages);
+  const [list, setList] = useState([]);
   const [editingId, setEditingId] = useState(null);
 
+  // Fetch packages from API
   const fetchData = () => {
     axios
       .get(API_URL, { headers: { Authorization: token } })
       .then((res) => {
         const apiData = res.data.Data || res.data.data || [];
-        setList([...defaultPackages, ...apiData]);
+        setList(apiData);
       })
-      .catch(() => setList(defaultPackages));
+      .catch(() => setList([]));
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const handleFileUpload = (e) => {
-    setForm({ ...form, imageFile: e.target.files[0] });
-  };
+  const handleFileUpload = (e) => setForm({ ...form, imageFile: e.target.files[0] });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -80,32 +49,15 @@ function PackagesManagement() {
     if (form.imageFile) formData.append("image", form.imageFile);
 
     if (editingId) {
-      if (editingId.startsWith("default-")) {
-        setList((prev) =>
-          prev.map((item) =>
-            item._id === editingId
-              ? {
-                ...item,
-                name: form.name,
-                destination: form.destination,
-                duration: form.duration,
-                price: form.price,
-                image: form.imageFile
-                  ? URL.createObjectURL(form.imageFile)
-                  : item.image,
-              }
-              : item
-          )
-        );
-      } else {
-        axios
-          .patch(`${API_URL}/${editingId}`, formData, {
-            headers: { Authorization: token, "Content-Type": "multipart/form-data" },
-          })
-          .then(fetchData);
-      }
+      // Update existing package
+      axios
+        .patch(`${API_URL}/${editingId}`, formData, {
+          headers: { Authorization: token, "Content-Type": "multipart/form-data" },
+        })
+        .then(fetchData);
       setEditingId(null);
     } else {
+      // Add new package
       axios
         .post(API_URL, formData, {
           headers: { Authorization: token, "Content-Type": "multipart/form-data" },
@@ -129,13 +81,7 @@ function PackagesManagement() {
 
   const handleDelete = (id) => {
     if (window.confirm("Delete this package?")) {
-      if (id.startsWith("default-")) {
-        setList((prev) => prev.filter((item) => item._id !== id));
-      } else {
-        axios
-          .delete(`${API_URL}/${id}`, { headers: { Authorization: token } })
-          .then(fetchData);
-      }
+      axios.delete(`${API_URL}/${id}`, { headers: { Authorization: token } }).then(fetchData);
     }
   };
 

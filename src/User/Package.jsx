@@ -68,43 +68,10 @@ function PackagesPage() {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative h-[50vh] bg-gradient-to-r from-blue-600 via-pink-500 to-purple-600 flex items-center justify-center text-center text-white">
-        <img
-          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80"
-          alt="Travel Hero"
-          className="absolute inset-0 w-full h-full object-cover opacity-40"
-        />
-        <div className="relative z-10 max-w-3xl px-4">
-          <h1 className="text-5xl font-extrabold drop-shadow-lg">
-            Discover Your Next <span className="text-yellow-300">Adventure</span>
-          </h1>
-          <p className="mt-4 text-lg text-white/90">
-            Handpicked packages for every traveler – explore, relax & enjoy life’s journey.
-          </p>
-        </div>
-
-        {/* Floating Search Bar */}
-        <div className="absolute bottom-[32px] left-1/2 -translate-x-1/2 w-full sm:w-2/3 md:w-1/2 px-4">
-          <div className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl flex items-center p-3">
-            <FaSearch className="ml-3 text-gray-500" />
-            <input
-              type="text"
-              placeholder="Search by destination or package..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-transparent outline-none px-3 text-gray-800"
-            />
-            <button className="bg-gradient-to-r from-pink-500 to-blue-500 text-white px-5 py-2 rounded-xl font-semibold hover:opacity-90 transition">
-              Search
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* Packages Grid */}
-      <section className="py-28 bg-gradient-to-br from-pink-50 via-white to-blue-50 relative">
+      <section className="py-20 bg-gradient-to-br from-pink-50 via-white to-blue-50 relative">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          {/* Heading */}
           <h2 className="text-3xl font-extrabold text-gray-900 text-center">
             Popular Travel Packages
           </h2>
@@ -112,6 +79,26 @@ function PackagesPage() {
             Choose from stunning destinations around the world.
           </p>
 
+          {/* Search Bar */}
+          <div className="mt-6 max-w-2xl mx-auto">
+            <div className="bg-white/95 backdrop-blur-xl shadow-xl rounded-2xl flex flex-col sm:flex-row items-center p-3 gap-2">
+              <div className="flex items-center w-full sm:flex-1">
+                <FaSearch className="ml-2 text-gray-500" />
+                <input
+                  type="text"
+                  placeholder="Search destination or package..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full bg-transparent outline-none px-3 text-gray-800"
+                />
+              </div>
+              <button className="bg-gradient-to-r from-pink-500 to-blue-500 text-white px-5 py-2 rounded-xl font-semibold hover:opacity-90 transition w-full sm:w-auto">
+                Search
+              </button>
+            </div>
+          </div>
+
+          {/* Cards */}
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
             {filteredPackages.length > 0 ? (
               filteredPackages.map((pkg) => (
