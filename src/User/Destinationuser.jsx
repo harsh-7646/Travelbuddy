@@ -6,25 +6,6 @@ import Footer from "./Footer";
 const token = "RTzcbSNYBybOqY1f";
 const API_URL = "https://generateapi.techsnack.online/api/destination";
 
-const defaultDestinations = [
-  {
-    _id: "default-1",
-    name: "Bali",
-    region: "Asia",
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-    description: "Golden beaches, surf spots, and cultural temples await you.",
-  },
-  {
-    _id: "default-2",
-    name: "Paris",
-    region: "Europe",
-    image:
-      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80",
-    description: "The romantic city of lights, fashion, and fine dining.",
-  },
-];
-
 const DestinationUser = () => {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -35,10 +16,10 @@ const DestinationUser = () => {
         headers: { Authorization: token },
       });
       const apiData = res.data?.Data || [];
-      setList([...defaultDestinations, ...apiData]);
+      setList(apiData);
     } catch (error) {
       console.error("Error fetching destinations:", error);
-      setList(defaultDestinations);
+      setList([]); // No fallback to default destinations
     } finally {
       setLoading(false);
     }

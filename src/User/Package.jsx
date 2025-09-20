@@ -6,38 +6,8 @@ import Footer from "./Footer";
 const API_URL = "https://generateapi.techsnack.online/api/package";
 const token = "K4OS0XNqsLR7enT6";
 
-const defaultPackages = [
-  {
-    _id: "default-1",
-    name: "Romantic Paris Getaway",
-    destination: "Paris",
-    duration: "5 Days",
-    price: 50000,
-    image:
-      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    _id: "default-2",
-    name: "Bali Adventure",
-    destination: "Bali",
-    duration: "7 Days",
-    price: 40000,
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQci5H4dz84BSITFdM6CRrl5H927Iep5RxV2Q&s",
-  },
-  {
-    _id: "default-3",
-    name: "Maldives Escape",
-    destination: "Maldives",
-    duration: "4 Nights / 5 Days",
-    price: 95000,
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80",
-  },
-];
-
 function PackagesPage() {
-  const [packages, setPackages] = useState(defaultPackages);
+  const [packages, setPackages] = useState([]);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -49,14 +19,17 @@ function PackagesPage() {
       const res = await axios.get(API_URL, { headers: { Authorization: token } });
 
       if (Array.isArray(res.data)) {
-        setPackages([...defaultPackages, ...res.data]);
+        setPackages(res.data);
       } else if (res.data?.Data) {
-        setPackages([...defaultPackages, ...res.data.Data]);
+        setPackages(res.data.Data);
       } else if (res.data?.data) {
-        setPackages([...defaultPackages, ...res.data.data]);
+        setPackages(res.data.data);
+      } else {
+        setPackages([]);
       }
     } catch (err) {
       console.error("Error fetching packages:", err);
+      setPackages([]); // no fallback defaults
     }
   };
 

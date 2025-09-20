@@ -126,15 +126,14 @@ function Destination() {
             <h3>{dest.name}</h3>
             <p><b>Region:</b> {dest.region}</p>
             <p>{dest.description}</p>
-            {/* Edit/Delete buttons removed for clean user-like design */}
             <div className="card-actions1">
-  <button onClick={() => handleEdit(dest)} className="edit-btn">
-    <MdEdit />
-  </button>
-  <button onClick={() => handleDelete(dest._id)} className="delete-btn">
-    <MdDelete />
-  </button>
-</div>
+              <button onClick={() => handleEdit(dest)} className="edit-btn">
+                <MdEdit />
+              </button>
+              <button onClick={() => handleDelete(dest._id)} className="delete-btn">
+                <MdDelete />
+              </button>
+            </div>
           </div>
         ))}
       </div>
