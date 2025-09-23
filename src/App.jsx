@@ -47,12 +47,13 @@
 // export default App;
 
 
-// // RTzcbSNYBybOqY1f
-// // K4OS0XNqsLR7enT6
-// f0GG2jSiHJVRuZNc
 
 
 
+
+// Destination : RTzcbSNYBybOqY1f
+// package : K4OS0XNqsLR7enT6
+// review : dPEwRulbwf8Ktfd3
 
 
 // App.jsx

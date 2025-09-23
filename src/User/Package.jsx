@@ -29,7 +29,7 @@ function PackagesPage() {
       }
     } catch (err) {
       console.error("Error fetching packages:", err);
-      setPackages([]); // no fallback defaults
+      setPackages([]); 
     }
   };
 

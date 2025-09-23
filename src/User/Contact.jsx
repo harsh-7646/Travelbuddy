@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Contact.css";
 import Footer from "./Footer";
+import axios from "axios";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,11 +15,32 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+
+
+const token = "dPEwRulbwf8Ktfd3";   // same type of token
+const API_URL = "https://generateapi.techsnack.online/api/review";
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!formData.name || !formData.email || !formData.message) {
+    alert("Please fill all fields!");
+    return;
+  }
+
+  try {
+    await axios.post(API_URL, formData, {
+      headers: { Authorization: token }
+    });
+
     alert("Thank you for contacting us! We’ll get back to you soon.");
     setFormData({ name: "", email: "", message: "" });
-  };
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong!");
+  }
+};
+
 
   return (
     <>
