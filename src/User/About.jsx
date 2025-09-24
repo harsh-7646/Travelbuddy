@@ -128,22 +128,44 @@ function About() {
             </div>
           </div>
 
-          {/* Mission & Vision Section */}
-          <div className="mt-20 text-center max-w-3xl mx-auto">
-            <h3 className="text-2xl font-bold text-indigo-900">Our Mission</h3>
-            <p className="mt-4 text-slate-700">
-              To empower travelers by making trip planning effortless and
-              enjoyable, while ensuring unforgettable experiences through our
-              curated destinations and personalized services.
-            </p>
-            <h3 className="mt-10 text-2xl font-bold text-indigo-900">
-              Our Vision
-            </h3>
-            <p className="mt-4 text-slate-700">
-              To become the world’s most trusted travel companion, helping people
-              explore every corner of the globe with confidence and excitement.
-            </p>
+          {/* 🚀 Mission & Vision Section (Modern Gradient Glassy Style) */}
+          <div className="mt-20 relative bg-gradient-to-br from-indigo-50 via-white to-pink-50 py-16 px-6 rounded-3xl shadow-lg overflow-hidden">
+            {/* Decorative gradient orbs */}
+            <div className="absolute top-10 left-10 w-32 h-32 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
+            <div className="absolute bottom-10 right-10 w-40 h-40 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
+
+            <h2 className="text-3xl md:text-4xl font-extrabold text-center text-indigo-900 relative z-10">
+              Our Mission & Vision
+            </h2>
+
+            <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
+              {/* Mission */}
+              <div className="group bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-2xl mb-4 group-hover:scale-110 transition">
+                  🌟
+                </div>
+                <h3 className="text-xl font-bold text-indigo-900">Our Mission</h3>
+                <p className="mt-3 text-slate-700 leading-relaxed">
+                  To empower travelers by making trip planning effortless and enjoyable,
+                  while ensuring unforgettable experiences through curated destinations
+                  and personalized services.
+                </p>
+              </div>
+
+              {/* Vision */}
+              <div className="group bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-pink-500 to-red-500 text-white text-2xl mb-4 group-hover:scale-110 transition">
+                  🚀
+                </div>
+                <h3 className="text-xl font-bold text-indigo-900">Our Vision</h3>
+                <p className="mt-3 text-slate-700 leading-relaxed">
+                  To become the world’s most trusted travel companion, helping people
+                  explore every corner of the globe with confidence and excitement.
+                </p>
+              </div>
+            </div>
           </div>
+
         </div>
       </section>
 
