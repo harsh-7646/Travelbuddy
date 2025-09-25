@@ -42,29 +42,29 @@ function App() {
   return (
     <Router>
       <Routes>
-        
+
         <Route path="/login" element={<Login setUserType={setUserType} />} />
 
-        
-        <Route path="/" element={ <UserLayout> <Home /> </UserLayout> } />
 
-        <Route path="/destinations" element={ <UserLayout> <Destinationuser /> </UserLayout>} />
+        <Route path="/" element={<UserLayout> <Home /> </UserLayout>} />
 
-        <Route path="/package" element={ <UserLayout> <Package /> </UserLayout> } />
+        <Route path="/destinations" element={<UserLayout> <Destinationuser /> </UserLayout>} />
 
-        <Route path="/about" element={ <UserLayout> <About /> </UserLayout>} />
-        
-        <Route path="/contact" element={ <UserLayout> <Contact /> </UserLayout> } />
+        <Route path="/package" element={<UserLayout> <Package /> </UserLayout>} />
 
-        <Route path="/bookings" element={ <UserLayout> <Mybooking /> </UserLayout> } />
+        <Route path="/about" element={<UserLayout> <About /> </UserLayout>} />
 
-        
-        <Route path="/admin/*" element={ <ProtectedRoute role="admin" userType={userType}> <Dashboard /> </ProtectedRoute> } />
+        <Route path="/contact" element={<UserLayout> <Contact /> </UserLayout>} />
 
-       
+        <Route path="/bookings" element={<UserLayout> <Mybooking /> </UserLayout>} />
+
+
+        <Route path="/admin/*" element={<ProtectedRoute role="admin" userType={userType}> <Dashboard /> </ProtectedRoute>} />
+
+
         <Route path="/logout" element={<Navigate to="/login" replace />} />
 
-        
+
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

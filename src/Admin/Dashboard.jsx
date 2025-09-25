@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate, NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 
@@ -18,17 +18,62 @@ import { bookingData } from "./Booking";
 import { hotelData } from "./Hotelmanagement";
 import { userData } from "./User";
 import { transactionData } from "./Transaction";
+import axios from "axios";
 
 
 const DashboardHome = () => {
+
+
+  const [packageCount, setPackageCount] = useState(0);
+  const [destinationCount, setDestinationCount] = useState(0);
+  const [reviewCount, setreviewCount] = useState(0);
+
+
+  useEffect(() => {
+    // Fetch packages count
+    axios
+      .get("https://generateapi.techsnack.online/api/package", {
+        headers: { Authorization: 'K4OS0XNqsLR7enT6' },
+      })
+      .then((res) => {
+        const apiData = res.data.Data || res.data.data || [];
+        setPackageCount(apiData.length);
+      })
+      .catch(() => setPackageCount(0));
+
+    // Fetch destinations count
+    axios
+      .get("https://generateapi.techsnack.online/api/destination", {
+        headers: { Authorization: 'RTzcbSNYBybOqY1f' },
+      })
+      .then((res) => {
+        const apiData = res.data.Data || res.data.data || [];
+        setDestinationCount(apiData.length);
+      })
+      .catch(() => setDestinationCount(0));
+
+    // Fetch review count
+    axios
+      .get("https://generateapi.techsnack.online/api/review", {
+        headers: { Authorization: 'dPEwRulbwf8Ktfd3' },
+      })
+      .then((res) => {
+        const apiData = res.data.Data || res.data.data || [];
+        setreviewCount(apiData.length);
+      })
+      .catch(() => setreviewCount(0));
+  }, []);
+
+
+
   const stats = [
     { title: "Total Bookings", value: bookingData.length },
     { title: "Total Hotels", value: hotelData.length },
-    { title: "Total Packages", value: 6 },
+    { title: "Total Packages", value: packageCount },
     { title: "Total Users", value: userData.length },
-    { title: "Total Destination", value: 6 },
+    { title: "Total Destinations", value: destinationCount },
     { title: "Total Transaction", value: transactionData.length },
-    { title: "Total Review", value: 12 },
+    { title: "Total Review", value: reviewCount },
   ];
 
   return (
@@ -80,7 +125,7 @@ const Dashboard = () => {
 
   // 🔹 Logout handler
   const handleLogout = () => {
-    localStorage.removeItem("authToken"); 
+    localStorage.removeItem("authToken");
     navigate("/"); // redirect to user side home
   };
 

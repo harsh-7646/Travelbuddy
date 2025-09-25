@@ -129,8 +129,8 @@ function About() {
           </div>
 
           {/* 🚀 Mission & Vision Section (Modern Gradient Glassy Style) */}
-          <div className="mt-20 relative bg-gradient-to-br from-indigo-50 via-white to-pink-50 py-16 px-6 rounded-3xl shadow-lg overflow-hidden">
-            {/* Decorative gradient orbs */}
+          <div className="mt-16 relative bg-gradient-to-br from-indigo-50 via-white to-pink-50 py-16 px-6 rounded-3xl shadow-lg overflow-hidden">
+            
             <div className="absolute top-10 left-10 w-32 h-32 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
             <div className="absolute bottom-10 right-10 w-40 h-40 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
 
@@ -139,7 +139,7 @@ function About() {
             </h2>
 
             <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
-              {/* Mission */}
+              
               <div className="group bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-2xl mb-4 group-hover:scale-110 transition">
                   🌟
@@ -152,7 +152,6 @@ function About() {
                 </p>
               </div>
 
-              {/* Vision */}
               <div className="group bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-pink-500 to-red-500 text-white text-2xl mb-4 group-hover:scale-110 transition">
                   🚀
