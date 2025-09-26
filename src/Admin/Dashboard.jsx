@@ -15,7 +15,7 @@ import Transaction from "./Transaction";
 import Review from "./Review";
 
 import { bookingData } from "./Booking";
-import { hotelData } from "./Hotelmanagement";
+// import { hotelData } from "./Hotelmanagement";
 import { userData } from "./User";
 import { transactionData } from "./Transaction";
 import axios from "axios";
@@ -23,11 +23,10 @@ import axios from "axios";
 
 const DashboardHome = () => {
 
-
   const [packageCount, setPackageCount] = useState(0);
   const [destinationCount, setDestinationCount] = useState(0);
   const [reviewCount, setreviewCount] = useState(0);
-
+  const [hotelmanagementCount, sethotelmanagementCount] = useState(0);
 
   useEffect(() => {
     // Fetch packages count
@@ -62,13 +61,27 @@ const DashboardHome = () => {
         setreviewCount(apiData.length);
       })
       .catch(() => setreviewCount(0));
+
+
+      // Fetch hotel count
+    axios
+      .get("https://generateapi.techsnack.online/api/hotel", {
+        headers: { Authorization: 'ZnXgKXc7OLqLlVn5' },
+      })
+      .then((res) => {
+        const apiData = res.data.Data || res.data.data || [];
+        sethotelmanagementCount(apiData.length);
+      })
+      .catch(() => sethotelmanagementCount(0));
   }, []);
+
+  
 
 
 
   const stats = [
     { title: "Total Bookings", value: bookingData.length },
-    { title: "Total Hotels", value: hotelData.length },
+    { title: "Total Hotels", value: hotelmanagementCount },
     { title: "Total Packages", value: packageCount },
     { title: "Total Users", value: userData.length },
     { title: "Total Destinations", value: destinationCount },
